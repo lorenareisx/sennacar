@@ -1751,31 +1751,13 @@ const CMS_CONFIG = {
 
 async function carregarProdutos() {
   try {
-    // Primeiro, obtém a lista de todos os arquivos JSON na pasta de produtos
-    const response = await fetch('/.netlify/functions/list-productos');
-    const arquivos = await response.json();
-    
-    // Filtra apenas arquivos JSON (exclui .gitkeep e outros)
-    const jsonFiles = arquivos.filter(file => file.endsWith('.json'));
-    
-    // Carrega todos os produtos
-    const produtos = await Promise.all(
-      jsonFiles.map(async (arquivo) => {
-        const response = await fetch(`${CMS_CONFIG.productsEndpoint}/${arquivo}`);
-        if (!response.ok) throw new Error(`Erro ao carregar ${arquivo}`);
-        return await response.json();
-      })
-    );
-
-    exibirProdutos(produtos);
-    
+    const response = await fetch('/data/produtos.json');
+    const { produtos } = await response.json();
+    exibirProdutos(produtos || []);
   } catch (error) {
-    console.error('Erro:', error);
-    document.getElementById('produtos-container').innerHTML = `
-      <div class="alert alert-danger">
-        Erro ao carregar produtos. Recarregue a página.
-      </div>
-    `;
+    console.error("Erro ao carregar produtos:", error);
+    // Fallback opcional (pode remover)
+    exibirProdutos([{ nome: "Produto Exemplo", descricao: "Recarregue a página", preco: 0 }]);
   }
 }
 

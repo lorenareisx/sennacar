@@ -29,3 +29,11 @@ collections:
       - {label: "Preço", name: "preco", widget: "number", value_type: "float", step: 0.01}
       - {label: "Imagem", name: "imagem", widget: "image", required: false}
       - {label: "Destaque", name: "destaque", widget: "boolean", default: false}
+
+        # Adicione esta nova coleção para gerar a lista consolidada
+  - name: "produtos_lista"
+    label: "Lista de Produtos"
+    description: "Lista automática de todos os produtos"
+    file: "data/produtos.json"
+    fields:
+      - { label: "Produtos", name: "produtos", widget: "hidden", default: "auto" }

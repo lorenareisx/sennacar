@@ -1751,36 +1751,29 @@ const CMS_CONFIG = {
 
 async function carregarProdutos() {
   try {
-    // 1. Busca a lista de produtos (requer um arquivo índice ou pré-definido)
-    const produtosResponse = await fetch('/data/produtos/produtos.json');
+    const response = await fetch('/data/produtos.json');
+    if (!response.ok) throw new Error("Arquivo não encontrado");
     
-    if (produtosResponse.ok) {
-      const produtos = await produtosResponse.json();
-      return exibirProdutos(produtos);
+    const data = await response.json();
+    const produtos = data.produtos || [];  // Garante que seja um array
+    
+    if (produtos.length === 0) {
+      document.getElementById('produtos-container').innerHTML = `
+        <div class="col-12 text-center py-5">
+          <p>Nenhum produto cadastrado.</p>
+        </div>
+      `;
+    } else {
+      exibirProdutos(produtos);  // Sua função que mostra os produtos
     }
-
-    // 2. Se não encontrar, tenta carregar produtos individuais (para desenvolvimento)
-    const produtosManuais = [
-      'produto1.json',
-      'eu-me-mudo-pra-sua.json'
-    ];
-    
-    const produtosCarregados = await Promise.all(
-      produtosManuais.map(async arquivo => {
-        try {
-          const res = await fetch(`/data/produtos/${arquivo}`);
-          return await res.json();
-        } catch {
-          return null;
-        }
-      })
-    );
-
-    exibirProdutos(produtosCarregados.filter(p => p !== null));
-    
   } catch (error) {
-    console.error('Erro ao carregar produtos:', error);
-    exibirProdutos([]);
+    console.error("Erro ao carregar produtos:", error);
+    document.getElementById('produtos-container').innerHTML = `
+      <div class="col-12 text-center py-5">
+        <p class="text-danger">Erro ao carregar produtos</p>
+        <button onclick="location.reload()" class="btn btn-primary">Tentar novamente</button>
+      </div>
+    `;
   }
 }
 
@@ -1799,10 +1792,9 @@ function exibirProdutos(produtos) {
   
   container.innerHTML = produtos.map((produto, index) => {
     const delay = (index * 100) + 200;
-      // Modifique a linha que cria a URL da imagem:
-  const urlImagem = produto.imagem.startsWith('/') ? 
+    const urlImagem = produto.imagem.startsWith('/') ? 
     produto.imagem : 
-    `/img/uploads/${produto.imagem}`; 
+    `/img/uploads/${produto.imagem}`;    
     return `
       <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="${delay}">
         <div class="product-card ${produto.destaque ? 'featured-product' : ''}">

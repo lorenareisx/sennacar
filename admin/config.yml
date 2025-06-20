@@ -2,47 +2,23 @@ backend:
   name: git-gateway
   branch: main
   repo: lorenareisx/sennacar
-  commit_messages:
-    create: "Criado {{collection}} '{{slug}}'"
-    update: "Atualizado {{collection}} '{{slug}}'"
-    delete: "Removido {{collection}} '{{slug}}'"
-    uploadMedia: "Upload de mídia '{{path}}'"
-    deleteMedia: "Removido mídia '{{path}}'"
 
-# Configurações gerais
-publish_mode: editorial_workflow
 media_folder: "img/uploads"
 public_folder: "/img/uploads"
 
-# Coleções
 collections:
-  - name: "produtos"
+  - name: "produtos"  # ÚNICA coleção
     label: "Produtos"
     label_singular: "Produto"
-    description: "Lista de produtos disponíveis"
-    folder: "data/produtos"
-    create: true
-    slug: "{{slug}}"
-    identifier_field: "nome"
-    format: "json"
-    extension: "json"
-    fields:
-      - {label: "Nome", name: "nome", widget: "string", required: true}
-      - {label: "Descrição", name: "descricao", widget: "text"}
-      - {label: "Preço", name: "preco", widget: "number", value_type: "float", step: 0.01}
-      - {label: "Imagem", name: "imagem", widget: "image", required: false}
-      - {label: "Destaque", name: "destaque", widget: "boolean", required: false, default: false}
-
-  - name: "produtos_lista"
-    label: "Lista de Produtos"
-    file: "data/produtos/produtos.json"
+    file: "data/produtos.json"  # ARQUIVO ÚNICO
+    format: json
     fields:
       - name: "produtos"
-        label: "Produtos"
+        label: "Lista de Produtos"
         widget: "list"
         fields:
-          - {label: "Nome", name: "nome", widget: "string"}
+          - {label: "Nome", name: "nome", widget: "string", required: true}
           - {label: "Descrição", name: "descricao", widget: "text"}
-          - {label: "Preço", name: "preco", widget: "number"}
+          - {label: "Preço", name: "preco", widget: "number", value_type: "float"}
           - {label: "Imagem", name: "imagem", widget: "image"}
-          - {label: "Destaque", name: "destaque", widget: "boolean"}
+          - {label: "Destaque", name: "destaque", widget: "boolean", default: false}

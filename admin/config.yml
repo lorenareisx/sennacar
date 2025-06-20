@@ -9,17 +9,19 @@ backend:
     uploadMedia: "Upload de mídia '{{path}}'"
     deleteMedia: "Removido mídia '{{path}}'"
 
-publish_mode: editorial_workflow # Adicione esta linha para ter mais controle
-
+publish_mode: editorial_workflow
 media_folder: "img/uploads"
 public_folder: "/img/uploads"
 
 collections:
   - name: "produtos"
     label: "Produtos"
-    file: "data/produtos.json"  # Mude de folder para file
+    label_singular: "Produto"  # Adicione esta linha
+    file: "data/produtos.json"
     create: true
     format: json
+    slug: "{{slug}}"  # Adicione esta linha
+    identifier_field: "nome"  # Adicione esta linha
     fields:
       - {label: "Nome", name: "nome", widget: "string", required: true}
       - {label: "Descrição", name: "descricao", widget: "text"}

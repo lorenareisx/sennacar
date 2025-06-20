@@ -1,0 +1,12 @@
+# Arquivos temporários
+*~
+.*~
+~*
+*.tmp
+
+# Netlify CMS
+img/uploads~*
+
+# Sistema
+.DS_Store
+Thumbs.db

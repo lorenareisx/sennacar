@@ -1,20 +1,22 @@
 backend:
   name: git-gateway
-  branch: main # ou o branch que você usa
+  branch: main
+  repo: lorenareisx/sennacar # ATUALIZE COM SEU REPOSITÓRIO
 
-media_folder: "img/uploads" # pasta onde as imagens serão armazenadas
+media_folder: "img/uploads"
 public_folder: "/img/uploads"
 
 collections:
   - name: "produtos"
     label: "Produtos"
-    folder: "data/produtos"  # Pasta onde os produtos serão salvos
+    folder: "data/produtos"
     create: true
     slug: "{{slug}}"
-    format: json  # Garante que será salvo como JSON
+    format: json
+    identifier_field: "nome"
     fields:
-      - {label: "Nome", name: "nome", widget: "string"}
+      - {label: "Nome", name: "nome", widget: "string", required: true}
       - {label: "Descrição", name: "descricao", widget: "text"}
-      - {label: "Preço", name: "preco", widget: "number", valueType: "float"}
+      - {label: "Preço", name: "preco", widget: "number", value_type: "float"}
       - {label: "Imagem", name: "imagem", widget: "image", required: false}
       - {label: "Destaque", name: "destaque", widget: "boolean", required: false}

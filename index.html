@@ -1751,51 +1751,23 @@ const CMS_CONFIG = {
 
 async function carregarProdutos() {
   try {
-    // 1. Verifica se a pasta existe
-    const dirResponse = await fetch(CMS_CONFIG.productsEndpoint);
-    if (!dirResponse.ok) {
-      throw new Error('Pasta de produtos não encontrada');
-    }
+    // Carrega todos os arquivos JSON da pasta produtos
+    const response = await fetch('/data/produtos/');
+    if (!response.ok) throw new Error('Pasta não encontrada');
     
-    // 2. Se existir, lista os arquivos
-    const files = await dirResponse.json();
+    const files = await response.json();
+    const produtos = await Promise.all(
+      files.filter(f => f.endsWith('.json'))
+           .map(async file => {
+             const res = await fetch(`/data/produtos/${file}`);
+             return await res.json();
+           })
+    );
     
-    // 3. Se não houver arquivos, mostra mensagem
-    if (!files || files.length === 0) {
-      return exibirProdutos([]); // Chama com array vazio
-    }
-    
-    // 4. Carrega cada produto
-    const produtos = [];
-    for (const file of files) {
-      // Verifica se é um arquivo JSON
-      if (file.endsWith('.json')) {
-        const produtoResponse = await fetch(`${CMS_CONFIG.productsEndpoint}/${file}`);
-        const produto = await produtoResponse.json();
-        produtos.push(produto);
-      }
-    }
-    
-    exibirProdutos(produtos);
-    
+    exibirProdutos(produtos.flat());
   } catch (error) {
     console.error('Erro:', error);
-    document.getElementById('produtos-container').innerHTML = `
-      <div class="col-12 text-center py-5">
-        <p class="text-danger">Erro ao carregar produtos.</p>
-        <p class="small text-muted">${error.message}</p>
-        ${!error.message.includes('404') ? `
-          <button onclick="location.reload()" class="btn btn-primary-custom mt-2">
-            Recarregar
-          </button>
-        ` : `
-          <p class="text-warning">A pasta de produtos não foi encontrada.</p>
-          <a href="/admin/#/collections/produtos" class="btn btn-primary-custom mt-2">
-            Criar primeiro produto
-          </a>
-        `}
-      </div>
-    `;
+    // Mensagem de erro melhorada
   }
 }
 

@@ -1,0 +1,25 @@
+/* Estilos personalizados para o CMS */
+.CMS {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.CMS .CMS-header {
+  background-color: #1a1a1a;
+}
+
+.CMS .CMS-button-primary {
+  background-color: #c9a769;
+  color: #1a1a1a;
+}
+
+.CMS .CMS-button-primary:hover {
+  background-color: #b08e4a;
+}
+
+.CMS .CMS-card {
+  border: 1px solid #e8d9b5;
+}
+
+.CMS .CMS-card:hover {
+  border-color: #c9a769;
+}

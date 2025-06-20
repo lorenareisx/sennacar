@@ -1745,50 +1745,30 @@
 
    <script>
 // Configurações atualizadas
-const CONFIG = {
-  sheetId: '1h_WSSHv3Ln1tMaOhsDZ2rB2KvW5JJkmZBOEViE7CFnI',
-  apiKey: 'AIzaSyCg9yNhv830_337PWLTMWA9oaOsubwV8os',
-  sheetName: 'Respostas ao formulário 1'
+// Configurações do CMS
+const CMS_CONFIG = {
+  productsEndpoint: '/data/produtos'
 };
 
-// Função para converter URL do Drive (mantida igual)
-function converterUrlDrive(url) {
-  // Verifica se a URL é válida
-  if (!url || !url.includes('drive.google.com')) {
-    return 'imagem-padrao.jpg';
-  }
-
-  // Extrai o ID do arquivo em qualquer formato
-  const fileId = url.match(/[\/=]([a-zA-Z0-9-_]{25,})/)?.[1];
-  
-  if (!fileId) {
-    console.error('Não foi possível extrair ID da URL:', url);
-    return 'imagem-padrao.jpg';
-  }
-
-  // Cria três opções de URL - uma delas vai funcionar
-  return [
-    `https://drive.google.com/thumbnail?id=${fileId}&sz=w1000`, // Opção 1 (mais confiável)
-    `https://lh3.googleusercontent.com/d/${fileId}=s1000`,      // Opção 2
-    `https://drive.google.com/uc?export=view&id=${fileId}`     // Opção 3
-  ];
-}
-
-// Função principal modificada para mapeamento correto
+// Função para carregar produtos
 async function carregarProdutos() {
   try {
-    console.log('Iniciando carregamento de produtos...');
-    const produtos = await carregarDadosPlanilha();
-    console.log('Produtos carregados:', produtos);
+    const response = await fetch(CMS_CONFIG.productsEndpoint);
+    if (!response.ok) throw new Error('Erro ao carregar produtos');
+    
+    const files = await response.json();
+    const produtos = [];
+    
+    for (const file of files) {
+      const produtoResponse = await fetch(`${CMS_CONFIG.productsEndpoint}/${file}`);
+      const produto = await produtoResponse.json();
+      produtos.push(produto);
+    }
+    
     exibirProdutos(produtos);
     
-    setInterval(async () => {
-      const novosProdutos = await carregarDadosPlanilha();
-      exibirProdutos(novosProdutos);
-    }, 300000);
-    
   } catch (error) {
-    console.error('Erro ao carregar produtos:', error);
+    console.error('Erro:', error);
     document.getElementById('produtos-container').innerHTML = `
       <div class="col-12 text-center py-5">
         <p class="text-danger">Erro ao carregar produtos. Por favor, tente recarregar a página.</p>
@@ -1798,59 +1778,14 @@ async function carregarProdutos() {
   }
 }
 
-// Nova versão com mapeamento explícito
-async function carregarDadosPlanilha() {
-  try {
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${CONFIG.sheetId}/values/${encodeURIComponent(CONFIG.sheetName)}!A:Z?key=${CONFIG.apiKey}`;
-    const response = await fetch(url);
-    
-    if (!response.ok) throw new Error('Erro na API: ' + response.status);
-    
-    const data = await response.json();
-    console.log('Dados brutos da API:', data);
-    
-    if (!data.values || data.values.length < 2) return [];
-    
-    // Encontra os índices das colunas baseado no cabeçalho
-    const headers = data.values[0].map(h => h.trim().toLowerCase());
-    console.log('Cabeçalhos encontrados:', headers);
-    
-    const nomeIndex = headers.findIndex(h => h.includes('nome'));
-    const descricaoIndex = headers.findIndex(h => h.includes('descrição') || h.includes('descricao'));
-    const precoIndex = headers.findIndex(h => h.includes('preço') || h.includes('preco'));
-    const imagemIndex = headers.findIndex(h => h.includes('imagem') || h.includes('foto'));
-    
-    console.log('Índices encontrados:', {
-      nomeIndex,
-      descricaoIndex,
-      precoIndex,
-      imagemIndex
-    });
-    
-    // Processa as linhas
-    return data.values.slice(1).map(row => {
-      return {
-        Nome: nomeIndex >= 0 ? row[nomeIndex] : 'Sem nome',
-        Descricao: descricaoIndex >= 0 ? row[descricaoIndex] : 'Sem descrição',
-        Preco: precoIndex >= 0 ? row[precoIndex] : 'Preço não informado',
-        Imagem: imagemIndex >= 0 ? converterUrlDrive(row[imagemIndex]) : 'imagem-padrao.jpg'
-      };
-    });
-    
-  } catch (error) {
-    console.error('Erro ao carregar dados:', error);
-    return [];
-  }
-}
-
-// Função exibirProdutos mantida igual
+// Função para exibir produtos
 function exibirProdutos(produtos) {
   const container = document.getElementById('produtos-container');
   
   if (!produtos || produtos.length === 0) {
     container.innerHTML = `
       <div class="col-12 text-center py-5">
-        <p>Nenhum produto encontrado.</p>
+        <p>Nenhum produto encontrado. <a href="/admin/#/collections/produtos" class="text-gold">Adicione produtos no CMS</a></p>
       </div>
     `;
     return;
@@ -1858,27 +1793,25 @@ function exibirProdutos(produtos) {
   
   container.innerHTML = produtos.map((produto, index) => {
     const delay = (index * 100) + 200;
-    const urlImagem = produto.Imagem || 'imagem-padrao.jpg';
-    
-    // Debug adicional para cada imagem
-    console.log(`Preparando imagem para ${produto.Nome}:`, urlImagem);
+    const urlImagem = produto.imagem ? `/img/uploads/${produto.imagem}` : 'imagem-padrao.jpg';
     
     return `
       <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="${delay}">
-        <div class="product-card">
+        <div class="product-card ${produto.destaque ? 'featured-product' : ''}">
+          ${produto.destaque ? '<div class="product-badge">Destaque</div>' : ''}
           <div class="product-img-container">
             <img src="${urlImagem}" 
                  class="product-img" 
-                 alt="${produto.Nome}"
+                 alt="${produto.nome}"
                  loading="lazy"
-                 onerror="this.onerror=null;this.src='imagem-padrao.jpg';console.error('Falha ao carregar: ${urlImagem}')">
+                 onerror="this.onerror=null;this.src='imagem-padrao.jpg'">
           </div>
           <div class="product-card-body">
-            <h5 class="product-title">${produto.Nome}</h5>
-            <p class="product-description">${produto.Descricao}</p>
+            <h5 class="product-title">${produto.nome}</h5>
+            <p class="product-description">${produto.descricao}</p>
             <div class="product-meta">
-              <span class="product-price">${produto.Preco ? 'R$ ' + produto.Preco : 'Preço não informado'}</span>
-              <a href="https://wa.me/5521999999999?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20${encodeURIComponent(produto.Nome)}" 
+              <span class="product-price">${produto.preco ? 'R$ ' + produto.preco : 'Preço sob consulta'}</span>
+              <a href="https://wa.me/5521999999999?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20${encodeURIComponent(produto.nome)}" 
                  class="btn btn-sm btn-primary-custom">Detalhes</a>
             </div>
           </div>

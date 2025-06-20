@@ -1,8 +1,7 @@
 [build]
-  functions = "netlify/functions"
+  command = "npm install && npm run build"
   publish = "."
+  functions = "netlify/functions"
 
-[[redirects]]
-  from = "/data/produtos/*"
-  to = "/.netlify/functions/list-productos"
-  status = 200
+[functions]
+  node_bundler = "esbuild"

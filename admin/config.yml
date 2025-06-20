@@ -32,3 +32,20 @@ collections:
       - {label: "Preço", name: "preco", widget: "number", value_type: "float", step: 0.01}
       - {label: "Imagem", name: "imagem", widget: "image", required: false}
       - {label: "Destaque", name: "destaque", widget: "boolean", required: false, default: false}
+
+        - name: "produtos_lista"
+    label: "Lista de Produtos"
+    file: "data/produtos/produtos.json"
+    fields:
+      - {
+          name: "produtos",
+          label: "Produtos",
+          widget: "list",
+          fields: [
+            {label: "Nome", name: "nome", widget: "string"},
+            {label: "Descrição", name: "descricao", widget: "text"},
+            {label: "Preço", name: "preco", widget: "number"},
+            {label: "Imagem", name: "imagem", widget: "image"},
+            {label: "Destaque", name: "destaque", widget: "boolean"}
+          ]
+        }

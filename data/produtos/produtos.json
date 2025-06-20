@@ -1,0 +1,15 @@
+[
+  {
+    "nome": "Produto Exemplo",
+    "descricao": "Descrição do produto",
+    "preco": 99.90,
+    "imagem": "exemplo.jpg",
+    "destaque": false
+  },
+  {
+    "nome": "eu me mudo pra sua",
+    "descricao": "e a gente continua",
+    "preco": 100,
+    "imagem": "foto-vertical-de-uma-mulher-usando-um-colar-com-um-pingente-de-diamante-espalhando-perfume-nela.webp"
+  }
+]

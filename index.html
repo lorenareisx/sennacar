@@ -1751,12 +1751,36 @@ const CMS_CONFIG = {
 
 async function carregarProdutos() {
   try {
-    const response = await fetch('/data/produtos/produto1.json');
-    const produto = await response.json();
-    exibirProdutos([produto]);
+    // 1. Busca a lista de produtos (requer um arquivo índice ou pré-definido)
+    const produtosResponse = await fetch('/data/produtos/produtos.json');
+    
+    if (produtosResponse.ok) {
+      const produtos = await produtosResponse.json();
+      return exibirProdutos(produtos);
+    }
+
+    // 2. Se não encontrar, tenta carregar produtos individuais (para desenvolvimento)
+    const produtosManuais = [
+      'produto1.json',
+      'eu-me-mudo-pra-sua.json'
+    ];
+    
+    const produtosCarregados = await Promise.all(
+      produtosManuais.map(async arquivo => {
+        try {
+          const res = await fetch(`/data/produtos/${arquivo}`);
+          return await res.json();
+        } catch {
+          return null;
+        }
+      })
+    );
+
+    exibirProdutos(produtosCarregados.filter(p => p !== null));
+    
   } catch (error) {
     console.error('Erro ao carregar produtos:', error);
-    // Tratamento de erro
+    exibirProdutos([]);
   }
 }
 
@@ -1775,9 +1799,10 @@ function exibirProdutos(produtos) {
   
   container.innerHTML = produtos.map((produto, index) => {
     const delay = (index * 100) + 200;
-    const urlImagem = produto.imagem.startsWith('/') ? 
+      // Modifique a linha que cria a URL da imagem:
+  const urlImagem = produto.imagem.startsWith('/') ? 
     produto.imagem : 
-    `/img/uploads/${produto.imagem}`;    
+    `/img/uploads/${produto.imagem}`; 
     return `
       <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="${delay}">
         <div class="product-card ${produto.destaque ? 'featured-product' : ''}">

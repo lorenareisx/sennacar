@@ -2,6 +2,12 @@ backend:
   name: git-gateway
   branch: main
   repo: lorenareisx/sennacar
+  commit_messages:
+    create: "Criado {{collection}} '{{slug}}'"
+    update: "Atualizado {{collection}} '{{slug}}'"
+    delete: "Removido {{collection}} '{{slug}}'"
+    uploadMedia: "Upload de mídia '{{path}}'"
+    deleteMedia: "Removido mídia '{{path}}'"
 
 media_folder: "img/uploads"
 public_folder: "/img/uploads"
@@ -9,14 +15,17 @@ public_folder: "/img/uploads"
 collections:
   - name: "produtos"
     label: "Produtos"
-    folder: "data/produtos"  # Pasta onde os arquivos são salvos
+    label_singular: "Produto"
+    description: "Lista de produtos"
+    folder: "data/produtos"  # Usando folder em vez de file
     create: true
-    slug: "{{slug}}"
-    format: json
+    slug: "{{fields.nome}}-{{slug}}"
     identifier_field: "nome"
+    format: json
+    extension: json
     fields:
       - {label: "Nome", name: "nome", widget: "string", required: true}
       - {label: "Descrição", name: "descricao", widget: "text"}
-      - {label: "Preço", name: "preco", widget: "number", value_type: "float"}
-      - {label: "Imagem", name: "imagem", widget: "image"}
-      - {label: "Destaque", name: "destaque", widget: "boolean"}
+      - {label: "Preço", name: "preco", widget: "number", value_type: "float", step: 0.01}
+      - {label: "Imagem", name: "imagem", widget: "image", required: false}
+      - {label: "Destaque", name: "destaque", widget: "boolean", default: false}

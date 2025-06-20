@@ -1751,25 +1751,19 @@ const CMS_CONFIG = {
 
 async function carregarProdutos() {
   try {
-    // Busca TODOS os arquivos JSON da pasta produtos
-    const response = await fetch('/.netlify/functions/list-produtos');
-    const arquivos = await response.json();
+    // 1. Crie manualmente este arquivo na pasta /data/ (veja passo 3 abaixo)
+    const response = await fetch('/data/produtos.json');
+    const data = await response.json();
     
-    // Carrega cada produto individualmente
-    const produtos = await Promise.all(
-      arquivos.map(async (arquivo) => {
-        const res = await fetch(`/data/produtos/${arquivo}`);
-        return await res.json();
-      })
-    );
-
-    exibirProdutos(produtos.filter(p => p)); // Filtra possíveis erros
+    // 2. Exibe os produtos (sua função existente)
+    exibirProdutos(data.produtos || []);
     
   } catch (error) {
-    console.error("Erro:", error);
+    console.error("Erro ao carregar produtos:", error);
     document.getElementById('produtos-container').innerHTML = `
-      <div class="alert alert-danger">
-        Sistema temporariamente indisponível. Tente recarregar a página.
+      <div class="alert alert-warning text-center py-4">
+        <p>Os produtos serão exibidos aqui assim que forem cadastrados.</p>
+        <small class="text-muted">Se você é o administrador, verifique o CMS.</small>
       </div>
     `;
   }

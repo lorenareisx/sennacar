@@ -1746,21 +1746,23 @@
  <script>
 // Configuração atualizada
 const CMS_CONFIG = {
-  productsEndpoint: '/data/produtos' // Mantém para compatibilidade
+  productsEndpoint: '/data/produtos'
 };
 
 async function carregarProdutos() {
   try {
-    // Lista FIXA de arquivos (adicione novos manualmente aqui)
-    const arquivos = [
-      'exemplo.json',
-      'eu-me-mudo-pra-sua.json',
-      'agora-tá-de-standyby-agora-tá-de-standyby.json'
-    ];
-
+    // Primeiro, obtém a lista de todos os arquivos JSON na pasta de produtos
+    const response = await fetch('/.netlify/functions/list-productos');
+    const arquivos = await response.json();
+    
+    // Filtra apenas arquivos JSON (exclui .gitkeep e outros)
+    const jsonFiles = arquivos.filter(file => file.endsWith('.json'));
+    
+    // Carrega todos os produtos
     const produtos = await Promise.all(
-      arquivos.map(async (arquivo) => {
-        const response = await fetch(`/data/produtos/${arquivo}`);
+      jsonFiles.map(async (arquivo) => {
+        const response = await fetch(`${CMS_CONFIG.productsEndpoint}/${arquivo}`);
+        if (!response.ok) throw new Error(`Erro ao carregar ${arquivo}`);
         return await response.json();
       })
     );

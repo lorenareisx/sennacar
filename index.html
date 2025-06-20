@@ -1751,46 +1751,14 @@ const CMS_CONFIG = {
 
 async function carregarProdutos() {
   try {
-    // 1. Tenta carregar como arquivo único (opção mais eficiente)
-    const singleFileResponse = await fetch('/data/produtos.json');
+    const response = await fetch('/data/produtos.json');
+    if (!response.ok) throw new Error('Arquivo de produtos não encontrado');
     
-    if (singleFileResponse.ok) {
-      const produtos = await singleFileResponse.json();
-      return exibirProdutos(Array.isArray(produtos) ? produtos : [produtos]);
-    }
-
-    // 2. Se não existir, tenta carregar arquivos individuais
-    const dirResponse = await fetch('/data/produtos/');
-    if (!dirResponse.ok) throw new Error('Pasta de produtos não encontrada');
-
-    const files = await dirResponse.json();
-    const produtos = await Promise.all(
-      files.filter(f => f.endsWith('.json'))
-           .map(async file => {
-             const res = await fetch(`/data/produtos/${file}`);
-             if (!res.ok) return null;
-             const content = await res.json();
-             return content;
-           })
-    );
-
-    exibirProdutos(produtos.filter(Boolean));
-    
+    const produtos = await response.json();
+    exibirProdutos(Array.isArray(produtos) ? produtos : [produtos]);
   } catch (error) {
     console.error('Erro ao carregar produtos:', error);
-    exibirProdutos([]);
-    
-    // Mensagem detalhada para o usuário
-    document.getElementById('produtos-container').innerHTML = `
-      <div class="col-12 text-center py-5">
-        <p class="text-danger">Erro ao carregar produtos</p>
-        <p class="small text-muted">${error.message}</p>
-        <div class="mt-3">
-          <button onclick="location.reload()" class="btn btn-primary me-2">Recarregar</button>
-          <a href="/admin/#/collections/produtos" class="btn btn-outline-primary">Verificar CMS</a>
-        </div>
-      </div>
-    `;
+    // ... (seu tratamento de erro atual)
   }
 }
 

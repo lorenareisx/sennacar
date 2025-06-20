@@ -17,11 +17,9 @@ public_folder: "/img/uploads"
 collections:
   - name: "produtos"
     label: "Produtos"
-    folder: "data/produtos"
+    file: "data/produtos.json"  # Mude de folder para file
     create: true
-    slug: "{{slug}}"
     format: json
-    extension: json
     fields:
       - {label: "Nome", name: "nome", widget: "string", required: true}
       - {label: "Descrição", name: "descricao", widget: "text"}

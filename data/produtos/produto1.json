@@ -1,0 +1,7 @@
+{
+  "nome": "Produto Exemplo",
+  "descricao": "Descrição do produto",
+  "preco": 99.90,
+  "imagem": "exemplo.jpg",
+  "destaque": false
+}

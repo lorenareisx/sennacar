@@ -9,22 +9,26 @@ backend:
     uploadMedia: "Upload de mídia '{{path}}'"
     deleteMedia: "Removido mídia '{{path}}'"
 
+# Configurações gerais
 publish_mode: editorial_workflow
 media_folder: "img/uploads"
 public_folder: "/img/uploads"
 
+# Coleções
 collections:
   - name: "produtos"
     label: "Produtos"
-    label_singular: "Produto"  # Adicione esta linha
-    file: "data/produtos.json"
+    label_singular: "Produto"
+    description: "Lista de produtos disponíveis"
+    folder: "data/produtos"  # Mudado de 'file' para 'folder'
     create: true
-    format: json
-    slug: "{{slug}}"  # Adicione esta linha
-    identifier_field: "nome"  # Adicione esta linha
+    slug: "{{slug}}"
+    identifier_field: "nome"
+    format: "json"
+    extension: "json"
     fields:
       - {label: "Nome", name: "nome", widget: "string", required: true}
       - {label: "Descrição", name: "descricao", widget: "text"}
-      - {label: "Preço", name: "preco", widget: "number", value_type: "float"}
+      - {label: "Preço", name: "preco", widget: "number", value_type: "float", step: 0.01}
       - {label: "Imagem", name: "imagem", widget: "image", required: false}
-      - {label: "Destaque", name: "destaque", widget: "boolean", required: false}
+      - {label: "Destaque", name: "destaque", widget: "boolean", required: false, default: false}

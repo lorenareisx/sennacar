@@ -1751,14 +1751,12 @@ const CMS_CONFIG = {
 
 async function carregarProdutos() {
   try {
-    const response = await fetch('/data/produtos.json');
-    if (!response.ok) throw new Error('Arquivo de produtos não encontrado');
-    
-    const produtos = await response.json();
-    exibirProdutos(Array.isArray(produtos) ? produtos : [produtos]);
+    const response = await fetch('/data/produtos/produto1.json');
+    const produto = await response.json();
+    exibirProdutos([produto]);
   } catch (error) {
     console.error('Erro ao carregar produtos:', error);
-    // ... (seu tratamento de erro atual)
+    // Tratamento de erro
   }
 }
 

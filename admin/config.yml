@@ -19,7 +19,7 @@ collections:
     label: "Produtos"
     folder: "data/produtos"
     create: true
-    slug: "{{fields.nome | slugify}}"
+    slug: "{{slug}}"
     format: json
     extension: json
     fields:

@@ -1743,57 +1743,54 @@
 }
     </script>
 
-  <script>
-// Configurações atualizadas
+ <script>
+// Configuração atualizada
 const CMS_CONFIG = {
-  productsEndpoint: '/data/produtos' // Mantém assim para lista de arquivos
+  productsEndpoint: '/data/produtos' // Mantém para compatibilidade
 };
 
 async function carregarProdutos() {
   try {
-    // Tenta carregar a lista de produtos diretamente
-    const response = await fetch('/data/produtos.json');
+    // 1. Tenta carregar como arquivo único (opção mais eficiente)
+    const singleFileResponse = await fetch('/data/produtos.json');
     
-    // Se não existir, tenta o método antigo de listar arquivos
-    if (response.status === 404) {
-      return carregarProdutosFallback();
+    if (singleFileResponse.ok) {
+      const produtos = await singleFileResponse.json();
+      return exibirProdutos(Array.isArray(produtos) ? produtos : [produtos]);
     }
-    
-    if (!response.ok) throw new Error('Erro ao carregar produtos');
-    
-    const produtos = await response.json();
-    exibirProdutos(produtos);
-    
-  } catch (error) {
-    console.error('Erro principal:', error);
-    return carregarProdutosFallback();
-  }
-}
 
-async function carregarProdutosFallback() {
-  try {
-    const response = await fetch('/data/produtos/');
-    if (!response.ok) throw new Error('Pasta não encontrada');
-    
-    const files = await response.json();
-    if (!files || files.length === 0) {
-      return exibirProdutos([]);
-    }
-    
+    // 2. Se não existir, tenta carregar arquivos individuais
+    const dirResponse = await fetch('/data/produtos/');
+    if (!dirResponse.ok) throw new Error('Pasta de produtos não encontrada');
+
+    const files = await dirResponse.json();
     const produtos = await Promise.all(
       files.filter(f => f.endsWith('.json'))
            .map(async file => {
              const res = await fetch(`/data/produtos/${file}`);
              if (!res.ok) return null;
-             return await res.json();
+             const content = await res.json();
+             return content;
            })
     );
-    
+
     exibirProdutos(produtos.filter(Boolean));
     
   } catch (error) {
-    console.error('Erro fallback:', error);
+    console.error('Erro ao carregar produtos:', error);
     exibirProdutos([]);
+    
+    // Mensagem detalhada para o usuário
+    document.getElementById('produtos-container').innerHTML = `
+      <div class="col-12 text-center py-5">
+        <p class="text-danger">Erro ao carregar produtos</p>
+        <p class="small text-muted">${error.message}</p>
+        <div class="mt-3">
+          <button onclick="location.reload()" class="btn btn-primary me-2">Recarregar</button>
+          <a href="/admin/#/collections/produtos" class="btn btn-outline-primary">Verificar CMS</a>
+        </div>
+      </div>
+    `;
   }
 }
 
@@ -1812,8 +1809,9 @@ function exibirProdutos(produtos) {
   
   container.innerHTML = produtos.map((produto, index) => {
     const delay = (index * 100) + 200;
-    const urlImagem = produto.imagem ? `/img/uploads/${produto.imagem}` : 'imagem-padrao.jpg';
-    
+    const urlImagem = produto.imagem.startsWith('/') ? 
+    produto.imagem : 
+    `/img/uploads/${produto.imagem}`;    
     return `
       <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="${delay}">
         <div class="product-card ${produto.destaque ? 'featured-product' : ''}">

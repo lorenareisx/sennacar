@@ -1,7 +1,15 @@
 backend:
   name: git-gateway
   branch: main
-  repo: lorenareisx/sennacar # ATUALIZE COM SEU REPOSITÓRIO
+  repo: lorenareisx/sennacar
+  commit_messages:
+    create: "Criado {{collection}} '{{slug}}'"
+    update: "Atualizado {{collection}} '{{slug}}'"
+    delete: "Removido {{collection}} '{{slug}}'"
+    uploadMedia: "Upload de mídia '{{path}}'"
+    deleteMedia: "Removido mídia '{{path}}'"
+
+publish_mode: editorial_workflow # Adicione esta linha para ter mais controle
 
 media_folder: "img/uploads"
 public_folder: "/img/uploads"
@@ -11,9 +19,9 @@ collections:
     label: "Produtos"
     folder: "data/produtos"
     create: true
-    slug: "{{slug}}"
+    slug: "{{fields.nome | slugify}}"
     format: json
-    identifier_field: "nome"
+    extension: json
     fields:
       - {label: "Nome", name: "nome", widget: "string", required: true}
       - {label: "Descrição", name: "descricao", widget: "text"}

@@ -1751,23 +1751,49 @@ const CMS_CONFIG = {
 
 async function carregarProdutos() {
   try {
-    // Carrega todos os arquivos JSON da pasta produtos
+    // Tenta carregar a lista de produtos diretamente
+    const response = await fetch('/data/produtos.json');
+    
+    // Se não existir, tenta o método antigo de listar arquivos
+    if (response.status === 404) {
+      return carregarProdutosFallback();
+    }
+    
+    if (!response.ok) throw new Error('Erro ao carregar produtos');
+    
+    const produtos = await response.json();
+    exibirProdutos(produtos);
+    
+  } catch (error) {
+    console.error('Erro principal:', error);
+    return carregarProdutosFallback();
+  }
+}
+
+async function carregarProdutosFallback() {
+  try {
     const response = await fetch('/data/produtos/');
     if (!response.ok) throw new Error('Pasta não encontrada');
     
     const files = await response.json();
+    if (!files || files.length === 0) {
+      return exibirProdutos([]);
+    }
+    
     const produtos = await Promise.all(
       files.filter(f => f.endsWith('.json'))
            .map(async file => {
              const res = await fetch(`/data/produtos/${file}`);
+             if (!res.ok) return null;
              return await res.json();
            })
     );
     
-    exibirProdutos(produtos.flat());
+    exibirProdutos(produtos.filter(Boolean));
+    
   } catch (error) {
-    console.error('Erro:', error);
-    // Mensagem de erro melhorada
+    console.error('Erro fallback:', error);
+    exibirProdutos([]);
   }
 }
 

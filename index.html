@@ -1752,7 +1752,7 @@ const CMS_CONFIG = {
 async function carregarProdutos() {
   try {
     // Primeiro, obtém a lista de todos os arquivos JSON na pasta de produtos
-    const response = await fetch('/.netlify/functions/list-productos');
+    const response = await fetch('/.netlify/functions/list-productos.js');
     const arquivos = await response.json();
     
     // Filtra apenas arquivos JSON (exclui .gitkeep e outros)

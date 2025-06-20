@@ -8,12 +8,13 @@ public_folder: "/img/uploads"
 collections:
   - name: "produtos"
     label: "Produtos"
-    folder: "data/produtos"
+    folder: "data/produtos"  # Pasta onde os produtos serão salvos
     create: true
     slug: "{{slug}}"
+    format: json  # Garante que será salvo como JSON
     fields:
       - {label: "Nome", name: "nome", widget: "string"}
       - {label: "Descrição", name: "descricao", widget: "text"}
-      - {label: "Preço", name: "preco", widget: "string"}
+      - {label: "Preço", name: "preco", widget: "number", valueType: "float"}
       - {label: "Imagem", name: "imagem", widget: "image", required: false}
       - {label: "Destaque", name: "destaque", widget: "boolean", required: false}

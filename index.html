@@ -1743,26 +1743,37 @@
 }
     </script>
 
-   <script>
+  <script>
 // Configurações atualizadas
-// Configurações do CMS
 const CMS_CONFIG = {
-  productsEndpoint: '/data/produtos'
+  productsEndpoint: '/data/produtos' // Mantém assim para lista de arquivos
 };
 
-// Função para carregar produtos
 async function carregarProdutos() {
   try {
-    const response = await fetch(CMS_CONFIG.productsEndpoint);
-    if (!response.ok) throw new Error('Erro ao carregar produtos');
+    // 1. Verifica se a pasta existe
+    const dirResponse = await fetch(CMS_CONFIG.productsEndpoint);
+    if (!dirResponse.ok) {
+      throw new Error('Pasta de produtos não encontrada');
+    }
     
-    const files = await response.json();
+    // 2. Se existir, lista os arquivos
+    const files = await dirResponse.json();
+    
+    // 3. Se não houver arquivos, mostra mensagem
+    if (!files || files.length === 0) {
+      return exibirProdutos([]); // Chama com array vazio
+    }
+    
+    // 4. Carrega cada produto
     const produtos = [];
-    
     for (const file of files) {
-      const produtoResponse = await fetch(`${CMS_CONFIG.productsEndpoint}/${file}`);
-      const produto = await produtoResponse.json();
-      produtos.push(produto);
+      // Verifica se é um arquivo JSON
+      if (file.endsWith('.json')) {
+        const produtoResponse = await fetch(`${CMS_CONFIG.productsEndpoint}/${file}`);
+        const produto = await produtoResponse.json();
+        produtos.push(produto);
+      }
     }
     
     exibirProdutos(produtos);
@@ -1771,8 +1782,18 @@ async function carregarProdutos() {
     console.error('Erro:', error);
     document.getElementById('produtos-container').innerHTML = `
       <div class="col-12 text-center py-5">
-        <p class="text-danger">Erro ao carregar produtos. Por favor, tente recarregar a página.</p>
-        <button onclick="location.reload()" class="btn btn-primary-custom">Recarregar</button>
+        <p class="text-danger">Erro ao carregar produtos.</p>
+        <p class="small text-muted">${error.message}</p>
+        ${!error.message.includes('404') ? `
+          <button onclick="location.reload()" class="btn btn-primary-custom mt-2">
+            Recarregar
+          </button>
+        ` : `
+          <p class="text-warning">A pasta de produtos não foi encontrada.</p>
+          <a href="/admin/#/collections/produtos" class="btn btn-primary-custom mt-2">
+            Criar primeiro produto
+          </a>
+        `}
       </div>
     `;
   }

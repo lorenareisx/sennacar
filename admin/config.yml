@@ -20,7 +20,7 @@ collections:
     label: "Produtos"
     label_singular: "Produto"
     description: "Lista de produtos disponíveis"
-    folder: "data/produtos"  # Mudado de 'file' para 'folder'
+    folder: "data/produtos"
     create: true
     slug: "{{slug}}"
     identifier_field: "nome"
@@ -33,19 +33,16 @@ collections:
       - {label: "Imagem", name: "imagem", widget: "image", required: false}
       - {label: "Destaque", name: "destaque", widget: "boolean", required: false, default: false}
 
-        - name: "produtos_lista"
+  - name: "produtos_lista"
     label: "Lista de Produtos"
     file: "data/produtos/produtos.json"
     fields:
-      - {
-          name: "produtos",
-          label: "Produtos",
-          widget: "list",
-          fields: [
-            {label: "Nome", name: "nome", widget: "string"},
-            {label: "Descrição", name: "descricao", widget: "text"},
-            {label: "Preço", name: "preco", widget: "number"},
-            {label: "Imagem", name: "imagem", widget: "image"},
-            {label: "Destaque", name: "destaque", widget: "boolean"}
-          ]
-        }
+      - name: "produtos"
+        label: "Produtos"
+        widget: "list"
+        fields:
+          - {label: "Nome", name: "nome", widget: "string"}
+          - {label: "Descrição", name: "descricao", widget: "text"}
+          - {label: "Preço", name: "preco", widget: "number"}
+          - {label: "Imagem", name: "imagem", widget: "image"}
+          - {label: "Destaque", name: "destaque", widget: "boolean"}

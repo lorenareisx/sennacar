@@ -1,0 +1,1899 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senna Car - Couro | Revestimentos em Couro Premium para Veículos de Luxo</title>
+    <meta name="description" content="Excelência em revestimentos automotivos em couro genuíno. Personalização artesanal para bancos, painéis e volantes. Transforme seu veículo em uma obra de arte.">
+    
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#1a1a1a">
+    
+    <!-- Bootstrap 5.3.3 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts (Atualizadas para fontes mais premium) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome 6.5.1 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- CSS Personalizado -->
+    <style>
+        :root {
+            --primary-dark: #1a1a1a;
+            --primary-light: #f8f9fa;
+            --accent-gold: #c9a769;
+            --accent-gold-light: #e8d9b5;
+            --accent-gold-dark: #b08e4a;
+            --accent-brown: #5c4d3c;
+            --accent-tan: #d2b48c;
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --section-spacing: 120px;
+            --box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            --box-shadow-hover: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--primary-dark);
+            overflow-x: hidden;
+            background-color: var(--primary-light);
+            line-height: 1.7;
+            font-weight: 400;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            line-height: 1.3;
+        }
+        
+        a {
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        /* Scrollbar personalizada */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--primary-light);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-gold);
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-gold-dark);
+        }
+        
+        /* Preloader */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-dark);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease;
+        }
+        
+        .preloader-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            color: var(--accent-gold);
+            position: relative;
+        }
+        
+        .preloader-logo::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent-gold);
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: preloaderLine 2s infinite cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        @keyframes preloaderLine {
+            0% { transform: scaleX(0); }
+            50% { transform: scaleX(1); transform-origin: left; }
+            51% { transform-origin: right; }
+            100% { transform: scaleX(0); transform-origin: right; }
+        }
+        
+        /* Navbar */
+        .navbar {
+            background-color: rgba(26, 26, 26, 0.98);
+            padding: 25px 0;
+            transition: var(--transition);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(201, 167, 105, 0.1);
+        }
+        
+        .navbar.scrolled {
+            padding: 15px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .navbar-brand {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+            font-size: 2rem;
+            color: var(--accent-gold) !important;
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .navbar-brand::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--accent-gold);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        
+        .navbar-brand:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        
+        .navbar-toggler {
+            border: none;
+            padding: 0.5rem;
+            color: var(--accent-gold);
+        }
+        
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+        
+        .nav-link {
+            color: var(--primary-light) !important;
+            font-weight: 500;
+            margin: 0 12px;
+            position: relative;
+            transition: var(--transition);
+            letter-spacing: 0.5px;
+            font-size: 0.95rem;
+            padding: 8px 0 !important;
+        }
+        
+        .nav-link:hover {
+            color: var(--accent-gold) !important;
+        }
+        
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--accent-gold);
+            transition: var(--transition);
+        }
+        
+        .nav-link:hover::before {
+            width: 100%;
+        }
+        
+        .nav-link.active {
+            color: var(--accent-gold) !important;
+        }
+        
+        .nav-link.active::before {
+            width: 100%;
+        }
+        
+        /* Botões */
+        .btn {
+            border-radius: 0;
+            font-weight: 600;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            padding: 14px 32px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            border: none;
+            text-transform: uppercase;
+        }
+        
+        .btn-primary-custom {
+            background-color: var(--accent-gold);
+            color: var(--primary-dark);
+            box-shadow: 0 5px 15px rgba(201, 167, 105, 0.3);
+        }
+        
+        .btn-primary-custom:hover {
+            background-color: var(--accent-brown);
+            color: var(--primary-light);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(201, 167, 105, 0.4);
+        }
+        
+        .btn-outline-custom {
+            background-color: transparent;
+            color: var(--primary-light);
+            border: 1px solid var(--primary-light);
+        }
+        
+        .btn-outline-custom:hover {
+            background-color: var(--primary-light);
+            color: var(--primary-dark);
+            border-color: var(--primary-light);
+        }
+        
+        .btn-primary-custom::after,
+        .btn-outline-custom::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(-100%) skewX(-15deg);
+            transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        
+        .btn-primary-custom:hover::after,
+        .btn-outline-custom:hover::after {
+            transform: translateX(100%) skewX(-15deg);
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            height: 100vh;
+            min-height: 800px;
+            background: linear-gradient(rgba(26, 26, 26, 0.85), rgba(26, 26, 26, 0.85)), 
+                        url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            color: var(--primary-light);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(to top, var(--primary-light), transparent);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-title {
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            line-height: 1.2;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            font-weight: 300;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+        
+        .hero-buttons .btn {
+            margin-right: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .hero-scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            color: var(--accent-gold);
+            font-size: 1.5rem;
+            animation: bounce 2s infinite;
+            cursor: pointer;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-20px) translateX(-50%); }
+            60% { transform: translateY(-10px) translateX(-50%); }
+        }
+        
+        /* Seções */
+        section {
+            padding: var(--section-spacing) 0;
+            position: relative;
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 80px;
+            font-size: 2.8rem;
+            text-align: center;
+            color: var(--primary-dark);
+        }
+        
+        .section-title-light {
+            color: var(--primary-light);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 3px;
+            background-color: var(--accent-gold);
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-subtitle {
+            max-width: 700px;
+            margin: 0 auto 60px;
+            text-align: center;
+            font-size: 1.1rem;
+            color: rgba(26, 26, 26, 0.8);
+        }
+        
+        .section-subtitle-light {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        /* Produtos */
+        .product-card {
+            border: none;
+            border-radius: 0;
+            overflow: hidden;
+            margin-bottom: 30px;
+            transition: var(--transition);
+            background-color: var(--primary-light);
+            box-shadow: var(--box-shadow);
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--box-shadow-hover);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--accent-gold);
+            color: var(--primary-dark);
+            padding: 5px 15px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            z-index: 2;
+        }
+        
+        .product-img-container {
+            overflow: hidden;
+            height: 280px;
+        }
+        
+        .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .product-card:hover .product-img {
+            transform: scale(1.1);
+        }
+        
+        .product-card-body {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--accent-brown);
+            font-size: 1.5rem;
+        }
+        
+        .product-description {
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        
+        .product-price {
+            font-weight: 700;
+            color: var(--accent-gold);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+        
+        .product-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+        
+        /* Features */
+        .features-section {
+            background-color: var(--primary-dark);
+            color: var(--primary-light);
+            padding: var(--section-spacing) 0;
+            position: relative;
+        }
+        
+        .features-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, var(--primary-light), transparent);
+            transform: translateY(-100%);
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: 40px 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(201, 167, 105, 0.1);
+            transition: var(--transition);
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(201, 167, 105, 0.2);
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 0;
+            background: var(--accent-gold);
+            transition: height 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        
+        .feature-card:hover::before {
+            height: 100%;
+        }
+        
+        .feature-icon {
+            font-size: 2.8rem;
+            color: var(--accent-gold);
+            margin-bottom: 25px;
+            transition: var(--transition);
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1);
+        }
+        
+        .feature-title {
+            font-family: 'Cormorant Garamond', serif;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+            color: var(--primary-light);
+        }
+        
+        .feature-text {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Galeria */
+        .gallery-item {
+            margin-bottom: 30px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            height: 350px;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+        
+        .gallery-item:hover {
+            box-shadow: var(--box-shadow-hover);
+        }
+        
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 26, 26, 0.7);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition);
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+        
+        .gallery-overlay-title {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--accent-gold);
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            transform: translateY(20px);
+            transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+            opacity: 0;
+        }
+        
+        .gallery-overlay-text {
+            color: var(--primary-light);
+            font-size: 0.9rem;
+            transform: translateY(20px);
+            transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1) 0.1s;
+            opacity: 0;
+        }
+        
+        .gallery-item:hover .gallery-overlay-title,
+        .gallery-item:hover .gallery-overlay-text {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        /* Depoimentos */
+        .testimonials-section {
+            background-color: var(--primary-light);
+            position: relative;
+        }
+        
+        .testimonials-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, var(--primary-dark), transparent);
+            transform: translateY(-100%);
+        }
+        
+        .testimonial-card {
+            background-color: var(--primary-light);
+            border-radius: 0;
+            padding: 40px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            border-top: 3px solid var(--accent-gold);
+            position: relative;
+            height: 100%;
+        }
+        
+        .testimonial-card::before {
+            content: '\201C';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 5rem;
+            color: rgba(201, 167, 105, 0.1);
+            line-height: 1;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .testimonial-author-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+            border: 2px solid var(--accent-gold);
+        }
+        
+        .client-name {
+            font-weight: 600;
+            color: var(--accent-brown);
+            margin-bottom: 5px;
+        }
+        
+        .client-car {
+            font-size: 0.9rem;
+            color: rgba(26, 26, 26, 0.7);
+        }
+        
+        .testimonial-rating {
+            color: var(--accent-gold);
+            margin-bottom: 15px;
+        }
+        
+        /* Contato */
+        .contact-section {
+            background: linear-gradient(rgba(26, 26, 26, 0.95), rgba(26, 26, 26, 0.95)), 
+                        url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            color: var(--primary-light);
+            padding: var(--section-spacing) 0;
+            position: relative;
+        }
+        
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, var(--primary-light), transparent);
+            transform: translateY(-100%);
+        }
+        
+        .contact-info {
+            margin-bottom: 40px;
+        }
+        
+        .contact-info-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: var(--accent-gold);
+        }
+        
+        .contact-info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+        
+        .contact-icon {
+            font-size: 1.8rem;
+            color: var(--accent-gold);
+            margin-right: 20px;
+            flex-shrink: 0;
+            margin-top: 5px;
+        }
+        
+        .contact-info-text h5 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: var(--primary-light);
+        }
+        
+        .contact-info-text p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 0;
+        }
+        
+        .form-control {
+            border-radius: 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--primary-light);
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            transition: var(--transition);
+            height: auto;
+        }
+        
+        .form-control:focus {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--primary-light);
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 0 0.25rem rgba(201, 167, 105, 0.25);
+        }
+        
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+            opacity: 1;
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+        }
+        
+        /* WhatsApp Float */
+        .whatsapp-float {
+            position: fixed;
+            width: 70px;
+            height: 70px;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 36px;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            animation: pulse 2s infinite;
+        }
+        
+        .whatsapp-float:hover {
+            background-color: #128C7E;
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+            animation: none;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary-dark);
+            color: var(--primary-light);
+            padding: 80px 0 30px;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, var(--primary-light), transparent);
+            transform: translateY(-100%);
+        }
+        
+        .footer-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+            font-size: 2rem;
+            color: var(--accent-gold);
+            margin-bottom: 25px;
+            display: inline-block;
+            position: relative;
+        }
+        
+        .footer-logo::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--accent-gold);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        
+        .footer-logo:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        
+        .footer-about {
+            margin-bottom: 25px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .footer-links h5 {
+            font-family: 'Cormorant Garamond', serif;
+            margin-bottom: 25px;
+            font-size: 1.4rem;
+            color: var(--accent-gold);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-links h5::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: var(--accent-gold);
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            transition: var(--transition);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .footer-links a::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--accent-gold);
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-gold);
+            padding-left: 8px;
+        }
+        
+        .footer-links a:hover::before {
+            width: 15px;
+        }
+        
+        .social-icons {
+            margin-top: 25px;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--primary-light);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            margin-right: 12px;
+            transition: var(--transition);
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--accent-gold);
+            color: var(--primary-dark);
+            transform: translateY(-5px);
+        }
+        
+        .newsletter-form {
+            position: relative;
+        }
+        
+        .newsletter-form .form-control {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--primary-light);
+            padding-right: 120px;
+        }
+        
+        .newsletter-form .btn {
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100%;
+            padding: 0 20px;
+            border-radius: 0;
+        }
+        
+        .copyright {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            margin-top: 50px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-align: center;
+        }
+        
+        /* Back to Top */
+        .back-to-top {
+            position: fixed;
+            bottom: 120px;
+            right: 40px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--accent-gold);
+            color: var(--primary-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background-color: var(--primary-dark);
+            color: var(--accent-gold);
+            transform: translateY(-5px);
+        }
+        
+        /* Modal */
+        .modal-content {
+            border-radius: 0;
+            border: none;
+        }
+        
+        .modal-header {
+            border-bottom: 1px solid rgba(201, 167, 105, 0.2);
+            background-color: var(--primary-dark);
+            color: var(--primary-light);
+        }
+        
+        .modal-title {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--accent-gold);
+        }
+        
+        .btn-close {
+            filter: invert(1);
+            opacity: 0.8;
+        }
+        
+        .modal-body {
+            padding: 0;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 1199.98px) {
+            :root {
+                --section-spacing: 100px;
+            }
+            
+            .hero-title {
+                font-size: 4rem;
+            }
+        }
+        
+        @media (max-width: 991.98px) {
+            :root {
+                --section-spacing: 80px;
+            }
+            
+            .hero-title {
+                font-size: 3.5rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+                margin-bottom: 60px;
+            }
+            
+            .navbar {
+                padding: 15px 0;
+            }
+            
+            .navbar-collapse {
+                background-color: var(--primary-dark);
+                padding: 20px;
+                margin-top: 15px;
+                border-top: 1px solid rgba(201, 167, 105, 0.1);
+            }
+            
+            .nav-link {
+                margin: 5px 0;
+                padding: 10px 0 !important;
+            }
+        }
+        
+        @media (max-width: 767.98px) {
+            :root {
+                --section-spacing: 70px;
+            }
+            
+            .hero-title {
+                font-size: 3rem;
+                margin-bottom: 20px;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+                margin-bottom: 30px;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+                margin-bottom: 50px;
+            }
+            
+            .feature-title {
+                font-size: 1.4rem;
+            }
+            
+            .contact-info-item {
+                flex-direction: column;
+            }
+            
+            .contact-icon {
+                margin-bottom: 10px;
+            }
+            
+            .back-to-top {
+                bottom: 110px;
+                right: 20px;
+            }
+            
+            .whatsapp-float {
+                width: 60px;
+                height: 60px;
+                font-size: 32px;
+                bottom: 30px;
+                right: 20px;
+            }
+        }
+        
+        @media (max-width: 575.98px) {
+            :root {
+                --section-spacing: 60px;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .btn {
+                padding: 12px 25px;
+            }
+            
+            .hero-buttons .btn {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .navbar-brand {
+                font-size: 1.8rem;
+            }
+            
+            .product-img-container {
+                height: 220px;
+            }
+            
+            .gallery-item {
+                height: 280px;
+            }
+        }
+    </style>
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-logo">Senna Car</div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#inicio">
+                <span>Senna Car</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#inicio">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#produtos">Produtos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#sobre">Sobre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#galeria">Galeria</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#depoimentos">Depoimentos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contato">Contato</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="inicio">
+        <div class="container">
+            <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
+                <h1 class="hero-title">Eleve o Luxo do Seu Veículo com Revestimentos em Couro Artesanal</h1>
+                <p class="hero-subtitle">Transformamos o interior do seu automóvel em uma experiência premium com couros selecionados e acabamentos impecáveis. Cada detalhe é meticulosamente trabalhado para criar um ambiente de requinte e sofisticação.</p>
+                <div class="d-flex flex-wrap hero-buttons">
+                    <a href="#produtos" class="btn btn-primary-custom me-3">Explorar Coleção</a>
+                    <a href="#contato" class="btn btn-outline-custom">Agendar Consulta</a>
+                </div>
+            </div>
+        </div>
+        <a href="#produtos" class="hero-scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </a>
+    </section>
+
+    <!-- Produtos Section -->
+    <section class="py-5" id="produtos">
+        <div class="container py-5">
+            <h2 class="section-title" data-aos="fade-up">Nossas Criações em Couro</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Seleção premium de revestimentos artesanais que redefinem o conceito de luxo automotivo</p>
+            
+            <div class="row" id="produtos-container">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section" id="sobre">
+        <div class="container">
+            <h2 class="section-title section-title-light" data-aos="fade-up">Excelência em Cada Detalhe</h2>
+            <p class="section-subtitle section-subtitle-light" data-aos="fade-up" data-aos-delay="100">O que nos diferencia no mercado de revestimentos automotivos premium</p>
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <h3 class="feature-title">Materiais Nobres</h3>
+                        <p class="feature-text">Selecionamos pessoalmente cada pele entre os melhores curtumes da Europa e América do Sul, garantindo padrões excepcionais de qualidade e durabilidade.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-cog"></i>
+                        </div>
+                        <h3 class="feature-title">Customização Total</h3>
+                        <p class="feature-text">Mais de 120 cores disponíveis, 15 padrões de costura e opções de acabamento. Criamos uma solução única que reflete seu estilo pessoal.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-car"></i>
+                        </div>
+                        <h3 class="feature-title">Encaixe Perfeito</h3>
+                        <p class="feature-text">Utilizamos scanners 3D para criar padrões precisos para cada modelo de veículo, garantindo instalação perfeita sem alterar os airbags originais.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="500">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="feature-title">Proteção Garantida</h3>
+                        <p class="feature-text">Garantia estendida de 5 anos contra desbotamento e rachaduras. Tratamentos especiais contra UV, manchas e desgaste para preservação a longo prazo.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeria Section -->
+    <section class="py-5" id="galeria">
+        <div class="container py-5">
+            <h2 class="section-title" data-aos="fade-up">Nossa Arte em Couro</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Galeria de projetos recentes que demonstram nossa maestria em revestimentos automotivos</p>
+            <div class="row">
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="gallery-item">
+                        <img src="#" class="gallery-img" alt="Trabalho 1">
+                        <div class="gallery-overlay">
+                            <h4 class="gallery-overlay-title">Mercedes-Benz Classe S</h4>
+                            <p class="gallery-overlay-text">Couro Nappa em tonalidade café com acabamento diamantado</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="gallery-item">
+                        <img src="#" class="gallery-img" alt="Trabalho 2">
+                        <div class="gallery-overlay">
+                            <h4 class="gallery-overlay-title">Porsche 911 Carrera</h4>
+                            <p class="gallery-overlay-text">Revestimento esportivo perfurado em duas tonalidades</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="gallery-item">
+                        <img src="#" class="gallery-img" alt="Trabalho 3">
+                        <div class="gallery-overlay">
+                            <h4 class="gallery-overlay-title">Range Rover Velar</h4>
+                            <p class="gallery-overlay-text">Couro ecológico premium com costura contrastante</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="gallery-item">
+                        <img src="#" class="gallery-img" alt="Trabalho 4">
+                        <div class="gallery-overlay">
+                            <h4 class="gallery-overlay-title">BMW Série 7</h4>
+                            <p class="gallery-overlay-text">Personalização completa em couro full-grain italiano</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="gallery-item">
+                        <img src="#" class="gallery-img" alt="Trabalho 5">
+                        <div class="gallery-overlay">
+                            <h4 class="gallery-overlay-title">Audi Q8</h4>
+                            <p class="gallery-overlay-text">Combinação bicolor com detalhes em alumínio escovado</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="gallery-item">
+                        <img src="#" class="gallery-img" alt="Trabalho 6">
+                        <div class="gallery-overlay">
+                            <h4 class="gallery-overlay-title">Tesla Model S</h4>
+                            <p class="gallery-overlay-text">Conversão completa para couro vegano premium</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Depoimentos Section -->
+    <section class="testimonials-section" id="depoimentos">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Vozes de Nossos Clientes</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">A satisfação de quem experimentou nosso trabalho artesanal</p>
+            <div class="row">
+                <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"Completamente transformou o interior do meu carro! O couro é incrivelmente macio e o serviço de instalação foi impecável. A atenção aos detalhes é impressionante - cada costura, cada curva foi perfeitamente executada. Valeu cada centavo!"</p>
+                        <div class="testimonial-author">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Roberto Silva" class="testimonial-author-img">
+                            <div>
+                                <h6 class="client-name mb-0">Roberto Silva</h6>
+                                <small class="client-car">Audi A4 2020</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"Fiquei impressionada com o nível de personalização possível. Escolhi uma combinação bicolor e ficou exatamente como eu imaginei. O atendimento foi excepcional - me guiaram em cada decisão e o resultado superou todas as expectativas. Recomendo muito!"</p>
+                        <div class="testimonial-author">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Ana Carolina" class="testimonial-author-img">
+                            <div>
+                                <h6 class="client-name mb-0">Ana Carolina</h6>
+                                <small class="client-car">Volkswagen Tiguan 2021</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p class="testimonial-text">"Meu carro parece novo por dentro! Optei pelo couro ecológico e ele superou minhas expectativas em conforto e durabilidade. Após um ano de uso, ainda parece novo. Excelente atendimento e qualidade de trabalho. Voltarei para meu próximo veículo!"</p>
+                        <div class="testimonial-author">
+                            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Marcos Andrade" class="testimonial-author-img">
+                            <div>
+                                <h6 class="client-name mb-0">Marcos Andrade</h6>
+                                <small class="client-car">Ford Ranger 2019</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato Section -->
+    <section class="contact-section" id="contato">
+        <div class="container">
+            <h2 class="section-title section-title-light" data-aos="fade-up">Agende Sua Consulta</h2>
+            <p class="section-subtitle section-subtitle-light" data-aos="fade-up" data-aos-delay="100">Estamos prontos para transformar o interior do seu veículo em uma experiência de luxo</p>
+            <div class="row">
+                <div class="col-lg-5 mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="200">
+                    <div class="contact-info">
+                        <h3 class="contact-info-title">Informações de Contato</h3>
+                        <div class="contact-info-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-info-text">
+                                <h5>Endereço</h5>
+                                <p>Av. Ayrton Senna, 4.100, Loja C, Rio de Janeiro - RJ, 22775-005</p>
+                            </div>
+                        </div>
+                        <div class="contact-info-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div class="contact-info-text">
+                                <h5>Telefone</h5>
+                                <p>(21) 99999-9999</p>
+                            </div>
+                        </div>
+                        <div class="contact-info-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-info-text">
+                                <h5>Email</h5>
+                                <p>contato@sennacarcouro.com.br</p>
+                            </div>
+                        </div>
+                        <div class="contact-info-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="contact-info-text">
+                                <h5>Horário</h5>
+                                <p>Segunda-Sexta: 9h às 18h<br>Sábado: 9h às 13h</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7" data-aos="fade-up" data-aos-delay="300">
+                    <form id="contactForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <input type="text" class="form-control" id="name" placeholder="Seu Nome" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <input type="email" class="form-control" id="email" placeholder="Seu Email" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <input type="tel" class="form-control" id="phone" placeholder="Seu Telefone">
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="subject" placeholder="Modelo do Veículo">
+                        </div>
+                        <div class="mb-4">
+                            <textarea class="form-control" id="message" rows="5" placeholder="Sua Mensagem ou Interesse Específico" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary-custom">Enviar Mensagem</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/5521999999999?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20os%20revestimentos%20em%20couro%20premium" class="whatsapp-float" target="_blank" aria-label="Contato via WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Back to Top -->
+    <a href="#inicio" class="back-to-top" aria-label="Voltar ao topo">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <a href="#inicio" class="footer-logo">Senna Car - Couro</a>
+                    <p class="footer-about">Especialistas em revestimentos automotivos premium desde 2025. Transformamos o interior dos veículos com couros da mais alta qualidade e artesanato impecável, elevando a experiência de direção a um novo patamar de sofisticação.</p>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-5 mb-md-0">
+                    <div class="footer-links">
+                        <h5>Navegação</h5>
+                        <ul>
+                            <li><a href="#inicio">Início</a></li>
+                            <li><a href="#produtos">Produtos</a></li>
+                            <li><a href="#sobre">Sobre Nós</a></li>
+                            <li><a href="#galeria">Galeria</a></li>
+                            <li><a href="#depoimentos">Depoimentos</a></li>
+                            <li><a href="#contato">Contato</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
+                    <div class="footer-links">
+                        <h5>Materiais</h5>
+                        <ul>
+                            <li><a href="#">Couro Nappa Italiano</a></li>
+                            <li><a href="#">Linha Esportiva</a></li>
+                            <li><a href="#">Couro Vegano</a></li>
+                            <li><a href="#">Costura Diamantada</a></li>
+                            <li><a href="#">Edição Bicolor</a></li>
+                            <li><a href="#">Pacote Master</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-links">
+                        <h5>Newsletter</h5>
+                        <p>Inscreva-se para receber nossas novidades, lançamentos exclusivos e ofertas especiais.</p>
+                        <form class="newsletter-form mt-4">
+                            <input type="email" class="form-control" placeholder="Seu melhor email" required>
+                            <button type="submit" class="btn btn-primary-custom">Assinar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 <strong>Senna Car</strong>. Todos os direitos reservados. 
+    <span class="d-block d-sm-inline mt-2 mt-sm-0">
+        Desenvolvido por <a href="https://www.airdart.com.br" target="_blank" rel="noopener noreferrer" style="color: #D4B483 !important;">AirdArt</a>.
+    </span>
+</p>
+
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal Gallery -->
+    <div class="modal fade" id="galleryModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="galleryModalLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="" class="img-fluid" id="galleryModalImage" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- AOS Animation -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Script Personalizado -->
+    <script>
+        // Preloader
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            setTimeout(function() {
+                preloader.style.opacity = '0';
+                setTimeout(function() {
+                    preloader.style.display = 'none';
+                }, 500);
+            }, 800);
+        });
+        
+        // Inicializa AOS Animation
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            mirror: false
+        });
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            const backToTop = document.querySelector('.back-to-top');
+            
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            
+            if (window.scrollY > 300) {
+                backToTop.classList.add('active');
+            } else {
+                backToTop.classList.remove('active');
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    // Fecha o menu mobile se estiver aberto
+                    const navbarCollapse = document.querySelector('.navbar-collapse');
+                    if (navbarCollapse.classList.contains('show')) {
+                        const bsCollapse = new bootstrap.Collapse(navbarCollapse);
+                        bsCollapse.hide();
+                    }
+                    
+                    // Scroll suave
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Atualiza a URL sem recarregar a página
+                    if (history.pushState) {
+                        history.pushState(null, null, targetId);
+                    } else {
+                        window.location.hash = targetId;
+                    }
+                }
+            });
+        });
+        
+        // Ativa links da navbar conforme scroll
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        window.addEventListener('scroll', function() {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Gallery modal
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const galleryModal = new bootstrap.Modal(document.getElementById('galleryModal'));
+        const galleryModalImage = document.getElementById('galleryModalImage');
+        const galleryModalLabel = document.getElementById('galleryModalLabel');
+        
+        galleryItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const imgSrc = this.querySelector('img').src;
+                const imgAlt = this.querySelector('img').alt;
+                const title = this.querySelector('.gallery-overlay-title') ? this.querySelector('.gallery-overlay-title').textContent : '';
+                
+                galleryModalImage.src = imgSrc;
+                galleryModalImage.alt = imgAlt;
+                galleryModalLabel.textContent = title;
+                galleryModal.show();
+            });
+        });
+        
+        // Form submission
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Simulação de envio
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const originalText = submitBtn.textContent;
+                
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Enviando...';
+                
+                setTimeout(function() {
+                    submitBtn.innerHTML = '<i class="fas fa-check"></i> Enviado!';
+                    
+                    setTimeout(function() {
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = originalText;
+                        contactForm.reset();
+                        
+                        // Mostra alerta de sucesso
+                        alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
+                    }, 1500);
+                }, 2000);
+            });
+        }
+        
+        // Newsletter form
+        const newsletterForms = document.querySelectorAll('.newsletter-form');
+        newsletterForms.forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const input = this.querySelector('input[type="email"]');
+                const btn = this.querySelector('button[type="submit"]');
+                const originalText = btn.textContent;
+                
+                btn.disabled = true;
+                btn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';
+                
+                setTimeout(function() {
+                    btn.innerHTML = '<i class="fas fa-check"></i>';
+                    input.value = '';
+                    
+                    setTimeout(function() {
+                        btn.disabled = false;
+                        btn.textContent = originalText;
+                    }, 1500);
+                }, 1500);
+            });
+        });
+
+        function doGet() {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  const data = sheet.getDataRange().getValues();
+  
+  const headers = data[0];
+  const produtos = data.slice(1).map(row => {
+    return headers.reduce((obj, header, i) => {
+      obj[header] = row[i];
+      return obj;
+    }, {});
+  });
+  
+  return ContentService.createTextOutput(JSON.stringify(produtos))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+    </script>
+
+   <script>
+// Configurações atualizadas
+const CONFIG = {
+  sheetId: '1h_WSSHv3Ln1tMaOhsDZ2rB2KvW5JJkmZBOEViE7CFnI',
+  apiKey: 'AIzaSyCg9yNhv830_337PWLTMWA9oaOsubwV8os',
+  sheetName: 'Respostas ao formulário 1'
+};
+
+// Função para converter URL do Drive (mantida igual)
+function converterUrlDrive(url) {
+  // Verifica se a URL é válida
+  if (!url || !url.includes('drive.google.com')) {
+    return 'imagem-padrao.jpg';
+  }
+
+  // Extrai o ID do arquivo em qualquer formato
+  const fileId = url.match(/[\/=]([a-zA-Z0-9-_]{25,})/)?.[1];
+  
+  if (!fileId) {
+    console.error('Não foi possível extrair ID da URL:', url);
+    return 'imagem-padrao.jpg';
+  }
+
+  // Cria três opções de URL - uma delas vai funcionar
+  return [
+    `https://drive.google.com/thumbnail?id=${fileId}&sz=w1000`, // Opção 1 (mais confiável)
+    `https://lh3.googleusercontent.com/d/${fileId}=s1000`,      // Opção 2
+    `https://drive.google.com/uc?export=view&id=${fileId}`     // Opção 3
+  ];
+}
+
+// Função principal modificada para mapeamento correto
+async function carregarProdutos() {
+  try {
+    console.log('Iniciando carregamento de produtos...');
+    const produtos = await carregarDadosPlanilha();
+    console.log('Produtos carregados:', produtos);
+    exibirProdutos(produtos);
+    
+    setInterval(async () => {
+      const novosProdutos = await carregarDadosPlanilha();
+      exibirProdutos(novosProdutos);
+    }, 300000);
+    
+  } catch (error) {
+    console.error('Erro ao carregar produtos:', error);
+    document.getElementById('produtos-container').innerHTML = `
+      <div class="col-12 text-center py-5">
+        <p class="text-danger">Erro ao carregar produtos. Por favor, tente recarregar a página.</p>
+        <button onclick="location.reload()" class="btn btn-primary-custom">Recarregar</button>
+      </div>
+    `;
+  }
+}
+
+// Nova versão com mapeamento explícito
+async function carregarDadosPlanilha() {
+  try {
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${CONFIG.sheetId}/values/${encodeURIComponent(CONFIG.sheetName)}!A:Z?key=${CONFIG.apiKey}`;
+    const response = await fetch(url);
+    
+    if (!response.ok) throw new Error('Erro na API: ' + response.status);
+    
+    const data = await response.json();
+    console.log('Dados brutos da API:', data);
+    
+    if (!data.values || data.values.length < 2) return [];
+    
+    // Encontra os índices das colunas baseado no cabeçalho
+    const headers = data.values[0].map(h => h.trim().toLowerCase());
+    console.log('Cabeçalhos encontrados:', headers);
+    
+    const nomeIndex = headers.findIndex(h => h.includes('nome'));
+    const descricaoIndex = headers.findIndex(h => h.includes('descrição') || h.includes('descricao'));
+    const precoIndex = headers.findIndex(h => h.includes('preço') || h.includes('preco'));
+    const imagemIndex = headers.findIndex(h => h.includes('imagem') || h.includes('foto'));
+    
+    console.log('Índices encontrados:', {
+      nomeIndex,
+      descricaoIndex,
+      precoIndex,
+      imagemIndex
+    });
+    
+    // Processa as linhas
+    return data.values.slice(1).map(row => {
+      return {
+        Nome: nomeIndex >= 0 ? row[nomeIndex] : 'Sem nome',
+        Descricao: descricaoIndex >= 0 ? row[descricaoIndex] : 'Sem descrição',
+        Preco: precoIndex >= 0 ? row[precoIndex] : 'Preço não informado',
+        Imagem: imagemIndex >= 0 ? converterUrlDrive(row[imagemIndex]) : 'imagem-padrao.jpg'
+      };
+    });
+    
+  } catch (error) {
+    console.error('Erro ao carregar dados:', error);
+    return [];
+  }
+}
+
+// Função exibirProdutos mantida igual
+function exibirProdutos(produtos) {
+  const container = document.getElementById('produtos-container');
+  
+  if (!produtos || produtos.length === 0) {
+    container.innerHTML = `
+      <div class="col-12 text-center py-5">
+        <p>Nenhum produto encontrado.</p>
+      </div>
+    `;
+    return;
+  }
+  
+  container.innerHTML = produtos.map((produto, index) => {
+    const delay = (index * 100) + 200;
+    const urlImagem = produto.Imagem || 'imagem-padrao.jpg';
+    
+    // Debug adicional para cada imagem
+    console.log(`Preparando imagem para ${produto.Nome}:`, urlImagem);
+    
+    return `
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="${delay}">
+        <div class="product-card">
+          <div class="product-img-container">
+            <img src="${urlImagem}" 
+                 class="product-img" 
+                 alt="${produto.Nome}"
+                 loading="lazy"
+                 onerror="this.onerror=null;this.src='imagem-padrao.jpg';console.error('Falha ao carregar: ${urlImagem}')">
+          </div>
+          <div class="product-card-body">
+            <h5 class="product-title">${produto.Nome}</h5>
+            <p class="product-description">${produto.Descricao}</p>
+            <div class="product-meta">
+              <span class="product-price">${produto.Preco ? 'R$ ' + produto.Preco : 'Preço não informado'}</span>
+              <a href="https://wa.me/5521999999999?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20${encodeURIComponent(produto.Nome)}" 
+                 class="btn btn-sm btn-primary-custom">Detalhes</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+  
+  if (typeof AOS !== 'undefined') {
+    AOS.refresh();
+  }
+}
+
+// Inicia quando o DOM estiver pronto
+document.addEventListener('DOMContentLoaded', carregarProdutos);
+</script>
+</body>
+</html>

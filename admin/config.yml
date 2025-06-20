@@ -7,18 +7,18 @@ media_folder: "img/uploads"
 public_folder: "/img/uploads"
 
 collections:
-  - name: "produtos"  # ÚNICA coleção
+  - name: "produtos"
     label: "Produtos"
     label_singular: "Produto"
-    file: "data/produtos.json"  # ARQUIVO ÚNICO
+    folder: "data/produtos"  # Pasta onde os produtos serão salvos
+    create: true
+    slug: "{{slug}}"
+    identifier_field: "nome"
     format: json
+    extension: json
     fields:
-      - name: "produtos"
-        label: "Lista de Produtos"
-        widget: "list"
-        fields:
-          - {label: "Nome", name: "nome", widget: "string", required: true}
-          - {label: "Descrição", name: "descricao", widget: "text"}
-          - {label: "Preço", name: "preco", widget: "number", value_type: "float"}
-          - {label: "Imagem", name: "imagem", widget: "image"}
-          - {label: "Destaque", name: "destaque", widget: "boolean", default: false}
+      - {label: "Nome", name: "nome", widget: "string", required: true}
+      - {label: "Descrição", name: "descricao", widget: "text"}
+      - {label: "Preço", name: "preco", widget: "number", value_type: "float", step: 0.01}
+      - {label: "Imagem", name: "imagem", widget: "image", required: false}
+      - {label: "Destaque", name: "destaque", widget: "boolean", default: false}

@@ -1751,27 +1751,25 @@ const CMS_CONFIG = {
 
 async function carregarProdutos() {
   try {
-    const response = await fetch('/data/produtos.json');
-    if (!response.ok) throw new Error("Arquivo não encontrado");
+    // Busca TODOS os arquivos JSON da pasta produtos
+    const response = await fetch('/.netlify/functions/list-produtos');
+    const arquivos = await response.json();
     
-    const data = await response.json();
-    const produtos = data.produtos || [];  // Garante que seja um array
+    // Carrega cada produto individualmente
+    const produtos = await Promise.all(
+      arquivos.map(async (arquivo) => {
+        const res = await fetch(`/data/produtos/${arquivo}`);
+        return await res.json();
+      })
+    );
+
+    exibirProdutos(produtos.filter(p => p)); // Filtra possíveis erros
     
-    if (produtos.length === 0) {
-      document.getElementById('produtos-container').innerHTML = `
-        <div class="col-12 text-center py-5">
-          <p>Nenhum produto cadastrado.</p>
-        </div>
-      `;
-    } else {
-      exibirProdutos(produtos);  // Sua função que mostra os produtos
-    }
   } catch (error) {
-    console.error("Erro ao carregar produtos:", error);
+    console.error("Erro:", error);
     document.getElementById('produtos-container').innerHTML = `
-      <div class="col-12 text-center py-5">
-        <p class="text-danger">Erro ao carregar produtos</p>
-        <button onclick="location.reload()" class="btn btn-primary">Tentar novamente</button>
+      <div class="alert alert-danger">
+        Sistema temporariamente indisponível. Tente recarregar a página.
       </div>
     `;
   }

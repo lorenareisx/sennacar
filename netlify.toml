@@ -1,2 +1,3 @@
 [build]
-  functions = "netlify/functions"
+  publish = "/"       # Pasta onde estão seus arquivos HTML/CSS/JS (normalmente a raiz)
+  functions = "netlify/functions"  # Pasta das suas funções serverless

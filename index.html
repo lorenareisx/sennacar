@@ -1750,14 +1750,36 @@ const CMS_CONFIG = {
 };
 
 async function carregarProdutos() {
+  const container = document.getElementById('produtos-container');
+  
   try {
-    const response = await fetch('/data/produtos.json');
-    const { produtos } = await response.json();
-    exibirProdutos(produtos || []);
+    // Opção 1 (recomendada)
+    const { produtos } = await (await fetch('/data/produtos.json')).json();
+    
+    // Opção 2 (alternativa)
+    // const files = await (await fetch('/.netlify/functions/list-productos')).json();
+    // const produtos = await Promise.all(files.map(f => fetch(`/data/produtos/${f}`).then(r => r.json())));
+    
+    if (!produtos?.length) throw new Error("Nenhum produto encontrado");
+    
+    // Exibe os produtos (seu código atual)
+    container.innerHTML = produtos.map(produto => `
+      <div class="col-lg-4 col-md-6">
+        <div class="product-card">
+          <img src="/img/uploads/${produto.imagem}" alt="${produto.nome}">
+          <h5>${produto.nome}</h5>
+          <p>${produto.descricao}</p>
+          <span>R$ ${produto.preco}</span>
+        </div>
+      </div>
+    `).join('');
+    
   } catch (error) {
-    console.error("Erro ao carregar produtos:", error);
-    // Fallback opcional (pode remover)
-    exibirProdutos([{ nome: "Produto Exemplo", descricao: "Recarregue a página", preco: 0 }]);
+    container.innerHTML = `
+      <div class="alert alert-warning">
+        Os produtos serão carregados em instantes. Caso persista, <a href="/admin/#/collections/produtos">verifique no CMS</a>.
+      </div>
+    `;
   }
 }
 
